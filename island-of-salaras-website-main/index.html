@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/webp" href="Media/Logo Salaras .webp">
+  <title>Hari Pertama di Hidupku</title>
+
+  <style>
+    @font-face {
+      font-family: "PixelCode-Bold";
+      src: url("Media/PixelCode-Bold.otf") format("opentype");
+      font-weight: bold;
+      font-style: normal;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      scroll-behavior: smooth;
+      font-family: "PixelCode-Bold", sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .scroll-container {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .section {
+      height: 100vh;
+      width: 100vw;
+      scroll-snap-align: start;
+      font-size: clamp(1.2rem, 3vw, 3rem);
+      color: white;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .first-section {
+  background: url('Media/background.webp') center no-repeat;
+  background-size: cover;
+  position: relative;
+}
+    .top-box,
+    .bottom-box {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 12vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      z-index: 10;
+    }
+
+    .top-box { top: 0; background-image: url("Media/Top box.webp"); }
+    .bottom-box { bottom: 0; background-image: url("Media/Bottom box.webp"); }
+
+    .logo img {
+      height: 10vh;
+      max-height: 120px;
+    }
+
+    .nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(1rem, 4vw, 4rem);
+    }
+
+    .nav-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .nav-item {
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease;
+      color: white;
+      font-size: clamp(0.7rem, 1.5vw, 1rem);
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .nav-item:hover {
+      background: #FFD700;
+      color: black;
+    }
+
+    .center-container {
+      position: absolute;
+      left: 50%;
+      bottom: 15vh;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      z-index: 1;
+    }
+
+    .big-logo img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .download-btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: #FFD700;
+      color: black;
+      font-size: clamp(0.8rem, 2vw, 1rem);
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .download-btn:hover {
+      background: #FFC300;
+      transform: translateY(-2px);
+    }
+
+    .c2, .c3, .c4 {
+      background: url("Media/Bg.webp") center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .static-image {
+      width: 90vw;
+      height: 60vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .static-image img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .c3 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .carousel-wrapper {
+      width: 90vw;
+      max-width: 1200px;
+      aspect-ratio: 2 / 1;
+      margin: auto;
+      position: relative;
+    }
+
+    .carousel {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .carousel-images {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-images img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      margin: auto;
+      flex-shrink: 0;
+    }
+
+    .carousel-wrapper button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 10;
+    }
+
+    .carousel-wrapper button img {
+      width: clamp(50px, 10vw, 120px);
+      height: auto;
+      transition: transform 0.2s ease;
+    }
+
+    .carousel-wrapper button img:hover {
+      transform: scale(1.15);
+    }
+
+    .carousel-wrapper .prev {
+      left: 0;
+      transform: translate(-50%, -50%);
+    }
+
+    .carousel-wrapper .next {
+      right: 0;
+      transform: translate(50%, -50%);
+    }
+
+    @media (max-width: 768px) {
+      .carousel-wrapper button img {
+        width: clamp(35px, 8vw, 80px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="scroll-container">
+    <section id="s1" class="section first-section">
+      <div class="top-box">
+        <div class="nav-row">
+          <div class="logo">
+            <img src="Media/logo.webp" alt="Logo">
+          </div>
+          <div class="nav-group">
+            <a href="#s1" class="nav-item">Home</a>
+            <a href="#s2" class="nav-item">Event</a>
+            <a href="#s3" class="nav-item">Character</a>
+            <a href="#s4" class="nav-item">Dev Note</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="center-container">
+        <div class="big-logo">
+          <img src="Media/Version logo.webp" alt="Big Logo">
+        </div>
+        <a href="https://fcdn.islandofsalaras.com/api/cdn/download/docs/Island of Salaras.apk" class="download-btn">⬇ Download</a>
+      </div>
+
+      <div class="bottom-box"></div>
+    </section>
+
+    <section id="s2" class="section c2">
+      <div class="static-image">
+        <img src="Media/event.webp" alt="Event">
+      </div>
+    </section>
+
+    <section id="s3" class="section c3">
+      <div class="carousel-wrapper">
+        <div class="carousel">
+          <div class="carousel-images">
+            <img src="Media/Alip.png" alt="Alip">
+            <img src="Media/Udin.png" alt="Udin">
+            <img src="Media/Alin.png" alt="Alin">
+          </div>
+        </div>
+        <button class="prev"><img src="Media/Kiri.webp" alt="Previous"></button>
+        <button class="next"><img src="Media/kanan.webp" alt="Next"></button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const carousel = document.querySelector(".carousel-images");
+    const prevBtn = document.querySelector(".prev");
+    const nextBtn = document.querySelector(".next");
+    const slides = document.querySelectorAll(".carousel-images img");
+
+    let index = 0;
+
+    function showSlide(i) {
+      if (i < 0) index = slides.length - 1;
+      else if (i >= slides.length) index = 0;
+      else index = i;
+      carousel.style.transform = `translateX(${-index * 100}%)`;
+    }
+
+    prevBtn.addEventListener("click", () => showSlide(index - 1));
+    nextBtn.addEventListener("click", () => showSlide(index + 1));
+  </script>
+</body>
+</html>
